@@ -21,15 +21,15 @@ public class StepDefinition {
 	public static WebDriver driver;
 	public WebDriverWait wait;
 	
-	@Given("^user is on homepage$")
-    public void user_is_on_homepage() throws Throwable {     
-    	System.setProperty("webdriver.chrome.driver","drivers//chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://automationbykrishna.com/");
-    }
-    
+//	@Given("^user is able to launch application url$")
+//    public void user_is_able_to_launch_application_url() throws Throwable {     
+//    	System.setProperty("webdriver.chrome.driver","drivers//chromedriver.exe");
+//        driver = new ChromeDriver();
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        driver.manage().window().maximize();
+//        driver.get("http://automationbykrishna.com/");
+//    }
+//    
     @When("^user navigates to registration Page$")
     public void user_navigates_to_Registration_Page() throws Throwable {
         driver.findElement(By.xpath("//a[@id='registration2']")).click();
