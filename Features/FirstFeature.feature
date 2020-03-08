@@ -1,7 +1,7 @@
 Feature: Chekout Feature
   Checkout flow for puchasing pillow
    
-   Scenario Outline: checkout flow for purchasing “Pillow” using Credit Card as payment method with valid card details
+   Scenario Outline: checkout flow for purchasing Pillow using Credit Card as payment method with valid card details
     Given user is able to launch application url
     When user clicks on Buy now button
 	And user should be navigated to Shopping Cart
@@ -21,7 +21,7 @@ Examples:
 |fileName|
 |CardDetails.json|
    
-    Scenario Outline: checkout flow for purchasing “Pillow” using Credit Card as payment method with invalid card details
+    Scenario Outline: checkout flow for purchasing Pillow using Credit Card as payment method with invalid card details
     Given user is able to launch application url
     When user clicks on Buy now button
 	And user should be navigated to Shopping Cart
@@ -36,18 +36,6 @@ Examples:
  #	And user navigated to payment processing page
 # 	And user enters otp after verifying total amount
 
-#
 Examples:
 |fileName|
 |InvalidCardDetails.json|
-#	
-#@Datatable	
-#	Scenario: Login as an authenticated user with data table
-#    Given user is on homepage
-#    When user navigates to registration Page
-#    And user enters following credentials
-#    | username  | password  |
-#    | test1234 | test@123456 |
-#    | alishachhabra | test@1237 |
-#    And user clicks on submit
-#    Then message "Success!" is displayed

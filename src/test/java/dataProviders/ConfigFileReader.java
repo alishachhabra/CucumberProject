@@ -31,20 +31,18 @@ public class ConfigFileReader {
 	}
 
 	public String getDriverPath() {
-		String driverPath = properties.getProperty("driverPath");
-		if (driverPath != null)
+		String driverPath = null;
+		if(properties.getProperty("browser").equalsIgnoreCase("Chrome")) {
+			driverPath = properties.getProperty("driverPath");
 			return driverPath;
-		else
+		}else if(properties.getProperty("browser").equalsIgnoreCase("Firefox")) {
+			driverPath = properties.getProperty("driverPathFirefox");
+			return driverPath;
+		}else
 			throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
 	}
 
-	// public long getImplicitlyWait() {
-	// String implicitlyWait = properties.getProperty("implicitlyWait");
-	// if(implicitlyWait != null) return Long.parseLong(implicitlyWait);
-	// else throw new RuntimeException("implicitlyWait not specified in the
-	// Configuration.properties file.");
-	// }
-	//
+	
 	public String getApplicationUrl() {
 		String url = properties.getProperty("url");
 		if (url != null)

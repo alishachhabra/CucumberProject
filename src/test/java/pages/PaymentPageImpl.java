@@ -31,14 +31,6 @@ public class PaymentPageImpl implements IPaymentPage {
 	public WebElement getTextCardNumber() {
 		return textCardNumber;
 	}
-	
-//	
-//	@FindBy(xpath = "//span[text()='Invalid card number']")
-//	private WebElement errorMessageInvalidCard;
-//
-//	public WebElement getErrorMessageInvalidCard() {
-//		return errorMessageInvalidCard;
-//	}
 
 	@FindBy(xpath = "//input[@placeholder='MM / YY']")
 	private WebElement textExpiryDate;
@@ -95,15 +87,13 @@ public class PaymentPageImpl implements IPaymentPage {
 	public WebElement getButtonOk() {
 		return buttonOk;
 	}
-	
-	
+
 	@FindBy(xpath = "//iframe[contains(@src,'token')]")
 	private WebElement frameToken;
 
 	public WebElement getFrameToken() {
 		return frameToken;
 	}
-	
 
 	public void verifyNavigatedToPaymentPage() {
 		SupportMethods.waitForElementToBeDisplayed(getTitlePaymentPage(), 10);
@@ -150,15 +140,14 @@ public class PaymentPageImpl implements IPaymentPage {
 		SupportMethods.waitForElementToBeDisplayed(getTextCardNumber(), 10);
 		getTextCardNumber().sendKeys(cardData.cardNumber);
 
-		if(WebDriverManager.getDriver().findElements(By.xpath("//span[text()='Invalid card number']")).size()!=0) {
-			throw new RuntimeException("Invalid Card number!. Enter valid card number");			
-			
-		}else {
+		if (WebDriverManager.getDriver().findElements(By.xpath("//span[text()='Invalid card number']")).size() != 0) {
+			throw new RuntimeException("Invalid Card number!. Enter valid card number");
+
+		} else {
 			getTextExpiryDate().sendKeys(cardData.expiryDate);
 			getTextCVV().sendKeys(cardData.cvv);
 		}
-		
-		
+
 	}
 
 	public void clickOnPayNow() {
@@ -169,7 +158,7 @@ public class PaymentPageImpl implements IPaymentPage {
 
 	public void verifyNavigatedToPaymentProcessingPage() {
 		SupportMethods.waitForElementToBeDisplayed(getFrameToken(), 20);
-		
+
 		WebDriverManager.getDriver().switchTo().frame(frameToken);
 		SupportMethods.waitForElementToBeDisplayed(getTitlePaymentProcessing(), 20);
 		Assert.assertTrue(getTitlePaymentProcessing().getText().contains("Issuing Bank"),
@@ -179,10 +168,10 @@ public class PaymentPageImpl implements IPaymentPage {
 	}
 
 	public void enterOtp(String otp, String amount) {
-		//WebDriverManager.getDriver().switchTo().defaultContent().switchTo().frame(0);
-//		SupportMethods.waitForElementToBeDisplayed(getTotalAmount(), 20);
-//		Assert.assertTrue(getTotalAmount().getText().replace(",", "").equals(amount),
-//				"Total transaction amount not matched");
+		// WebDriverManager.getDriver().switchTo().defaultContent().switchTo().frame(0);
+		// SupportMethods.waitForElementToBeDisplayed(getTotalAmount(), 20);
+		// Assert.assertTrue(getTotalAmount().getText().replace(",", "").equals(amount),
+		// "Total transaction amount not matched");
 
 		SupportMethods.waitForElementToBeDisplayed(getTextOtp(), 20);
 		getTextOtp().sendKeys("112233");
