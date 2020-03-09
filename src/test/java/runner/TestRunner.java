@@ -2,23 +2,19 @@ package runner;
 
 import java.io.File;
 
-import org.junit.AfterClass;
-import org.junit.runner.RunWith;
-import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterClass;
 
 import com.cucumber.listener.Reporter;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
 import managers.FileReaderManager;
-import managers.WebDriverManager;
 
-@RunWith(Cucumber.class)
 @CucumberOptions(features = "Features",
 glue = "steps",
 monochrome = true,
 plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"})
-public class TestRunner {
+public class TestRunner extends AbstractTestNGCucumberTests{
 
 	@AfterClass
 	public static void writeExtentReport() {

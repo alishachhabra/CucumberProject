@@ -10,19 +10,18 @@ import org.testng.Reporter;
 import managers.WebDriverManager;
 import utils.SupportMethods;
 
-public class OrderSummaryPopUpImpl implements IOrderSummaryPopUp{
+public class OrderSummaryPopUpImpl implements IOrderSummaryPopUp {
 
 	public OrderSummaryPopUpImpl(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	@FindBy(xpath = "//p[@class='text-page-title-content']")
 	private WebElement titleOrderSummary;
-	
-	
+
 	@FindBy(xpath = "//div[@class='order-id-optional']/div")
 	private WebElement orderId;
-	
+
 	@FindBy(xpath = "//a[@class='button-main-content']")
 	private WebElement buttonContinue;
 
@@ -37,7 +36,6 @@ public class OrderSummaryPopUpImpl implements IOrderSummaryPopUp{
 	public WebElement getButtonContinue() {
 		return buttonContinue;
 	}
-	
 
 	public void verifyNavigatedToOrderSummaryPopUp() {
 		WebDriverManager.getDriver().switchTo().frame(0);
@@ -51,8 +49,8 @@ public class OrderSummaryPopUpImpl implements IOrderSummaryPopUp{
 	public void clickOnContinueButton() {
 		SupportMethods.waitForElementToBeDisplayed(getButtonContinue(), 10);
 		getButtonContinue().click();
-		
+
 		Reporter.log("Click on Continue button");
 	}
-	
+
 }

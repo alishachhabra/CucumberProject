@@ -65,8 +65,8 @@ public class ShoppingCartPageImpl implements IShoppingCartPage {
 		findCustomerDetailFieldElement("City").sendKeys(customerData.city);
 		getCustomerAddress().clear();
 		getCustomerAddress().sendKeys(customerData.address);
-	//	findCustomerDetailFieldElement("Postal").clear();
-	//	findCustomerDetailFieldElement("Postal").sendKeys(customerData.postalCode);
+		// findCustomerDetailFieldElement("Postal").clear();
+		// findCustomerDetailFieldElement("Postal").sendKeys(customerData.postalCode);
 
 		Reporter.log("Customer details filled");
 		SupportMethods.waitForElementToBeClickable(getButtonCheckout(), 10);

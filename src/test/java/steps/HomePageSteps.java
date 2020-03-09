@@ -11,7 +11,6 @@ import pages.IHomePage;
 
 public class HomePageSteps {
 
-	// WebDriverManager webDriverManager = new WebDriverManager();
 	static WebDriver driver;
 	PageObjectManager pageObjectManager = new PageObjectManager(WebDriverManager.getDriver());
 	IHomePage homePage = pageObjectManager.getHomePage();

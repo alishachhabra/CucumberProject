@@ -37,10 +37,8 @@ public class Hooks {
 				File destinationPath = new File(System.getProperty("user.dir") + "/target/cucumber-reports/screenshots/"
 						+ screenshotName + ".png");
 
-				// Copy taken screenshot from source location to destination location
 				Files.copy(sourcePath, destinationPath);
 
-				// This attach the specified screenshot to the test
 				Reporter.addScreenCaptureFromPath(destinationPath.toString());
 			} catch (IOException e) {
 			}
