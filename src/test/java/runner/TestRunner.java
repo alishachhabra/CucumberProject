@@ -14,7 +14,7 @@ import managers.FileReaderManager;
 import managers.WebDriverManager;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/java/features",
+@CucumberOptions(features = "Features",
 glue = "steps",
 monochrome = true,
 plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"})

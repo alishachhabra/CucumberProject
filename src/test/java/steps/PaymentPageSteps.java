@@ -59,4 +59,10 @@ public class PaymentPageSteps {
 
 		paymentPage.enterOtp(cardData.otp,totalOrderAmount);
 	}
+	
+	@Then("^verify payment completed$")
+	public void verify_payment_completed() {
+
+		paymentPage.verifyPaymentCompletion();
+	}
 }

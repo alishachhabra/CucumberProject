@@ -88,11 +88,25 @@ public class PaymentPageImpl implements IPaymentPage {
 		return buttonOk;
 	}
 
-	@FindBy(xpath = "//iframe[contains(@src,'token')]")
-	private WebElement frameToken;
+	@FindBy(xpath = "//iframe[@id='snap-midtrans']")
+	private WebElement frameParent;
 
-	public WebElement getFrameToken() {
-		return frameToken;
+	public WebElement getFrameParent() {
+		return frameParent;
+	}
+
+	@FindBy(xpath = "//iframe[contains(@src,'token')]")
+	private WebElement frameChild;
+
+	public WebElement getFrameChild() {
+		return frameChild;
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Thank you')]")
+	private WebElement textMessagePaymentComplete;
+
+	public WebElement getTextMessagePaymentComplete() {
+		return textMessagePaymentComplete;
 	}
 
 	public void verifyNavigatedToPaymentPage() {
@@ -157,9 +171,12 @@ public class PaymentPageImpl implements IPaymentPage {
 	}
 
 	public void verifyNavigatedToPaymentProcessingPage() {
-		SupportMethods.waitForElementToBeDisplayed(getFrameToken(), 20);
+		SupportMethods.waitForElementToBeDisplayed(getFrameParent(), 20);
 
-		WebDriverManager.getDriver().switchTo().frame(frameToken);
+		WebDriverManager.getDriver().switchTo().frame(getFrameParent());
+
+		SupportMethods.waitForElementToBeDisplayed(getFrameChild(), 20);
+		WebDriverManager.getDriver().switchTo().frame(getFrameChild());
 		SupportMethods.waitForElementToBeDisplayed(getTitlePaymentProcessing(), 20);
 		Assert.assertTrue(getTitlePaymentProcessing().getText().contains("Issuing Bank"),
 				"Issuing Bank title is not displaying");
@@ -168,15 +185,17 @@ public class PaymentPageImpl implements IPaymentPage {
 	}
 
 	public void enterOtp(String otp, String amount) {
-		// WebDriverManager.getDriver().switchTo().defaultContent().switchTo().frame(0);
-		// SupportMethods.waitForElementToBeDisplayed(getTotalAmount(), 20);
-		// Assert.assertTrue(getTotalAmount().getText().replace(",", "").equals(amount),
-		// "Total transaction amount not matched");
 
 		SupportMethods.waitForElementToBeDisplayed(getTextOtp(), 20);
-		getTextOtp().sendKeys("112233");
+		getTextOtp().sendKeys(otp);
 
 		getButtonOk().click();
 
+	}
+
+	public void verifyPaymentCompletion() {
+		SupportMethods.waitForElementToBeDisplayed(getTextMessagePaymentComplete(), 20);
+		Assert.assertTrue(getTextMessagePaymentComplete().getText().contains("Thank you for your purchase."),
+				"Payment not completed");
 	}
 }

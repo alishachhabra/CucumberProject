@@ -19,4 +19,6 @@ public interface IPaymentPage {
 	void verifyNavigatedToPaymentProcessingPage();
 
 	void enterOtp(String otp, String amount);
+
+	void verifyPaymentCompletion();
 }
