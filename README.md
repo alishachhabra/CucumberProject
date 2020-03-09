@@ -12,6 +12,6 @@ How to Run -
 1. Take clone from repo
 2. Import project
 3. And run from pom.xml
-4. You can run from cmd - mvn test then pom.xml path
+4. You can run from cmd - go to path till project folder where pom.xml is kept and mvn test
 5. View report target-> cucumber-reports-> report.html
 6. For cross browser update the browser as Firefox or Chrome in configuration.properties
