@@ -13,10 +13,6 @@ Feature: Chekout Feature
  	And user navigated to payment type page
  	And user enter card details from file "<fileName>"
  	Then user clicks on paynow button
- 	And user navigated to payment processing page
- 	And user enters otp after verifying total amount
- 	Then verify payment completed
-
 
 Examples:
 |fileName|
