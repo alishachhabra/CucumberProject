@@ -43,7 +43,7 @@ public class PaymentPageSteps {
 
 	@Then("^user clicks on paynow button$")
 	public void user_clicks_on_pay_now() {
-
+		paymentPage.uncheckPromo();
 		paymentPage.clickOnPayNow();
 	}
 

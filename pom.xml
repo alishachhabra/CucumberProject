@@ -72,7 +72,7 @@
                 <version>2.14.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>TestSuite/testrun_config.xml</suiteXmlFile>
+                        <suiteXmlFile>TestSuite/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin> 

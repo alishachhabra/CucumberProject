@@ -52,7 +52,14 @@ public class PaymentPageImpl implements IPaymentPage {
 	public WebElement getTotalAmount() {
 		return totalAmount;
 	}
+	
+	@FindBy(xpath = "//input[@type='checkbox' and @value='on']//parent::label[text()='Midtrans Promo']")
+	private WebElement checkBoxPromo;
 
+	public WebElement getCheckBoxPromo() {
+		return checkBoxPromo;
+	}
+	
 	@FindBy(xpath = "//a[@class='button-main-content']")
 	private WebElement buttonPayNow;
 
@@ -164,6 +171,13 @@ public class PaymentPageImpl implements IPaymentPage {
 
 	}
 
+	
+	public void uncheckPromo() {
+		SupportMethods.waitForElementToBeDisplayed(getCheckBoxPromo(), 10);
+		getCheckBoxPromo().click();
+		
+	}
+	
 	public void clickOnPayNow() {
 		SupportMethods.waitForElementToBeDisplayed(getButtonPayNow(), 10);
 		getButtonPayNow().click();

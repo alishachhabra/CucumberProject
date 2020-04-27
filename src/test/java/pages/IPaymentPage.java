@@ -21,4 +21,5 @@ public interface IPaymentPage {
 	void enterOtp(String otp, String amount);
 
 	void verifyPaymentCompletion();
+	void uncheckPromo();
 }
