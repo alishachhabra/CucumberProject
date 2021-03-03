@@ -1,7 +1,7 @@
 {
-	"cardNumber": "4811111111111114",
-	"expiryDate": "05/20",
-	"cvv":"123",
-	"otp":"112233"
+	"bio": "Selenium Automation User",
+	"location": "Pune",
+	"website":"twitter.com",
+	"search":"@timesofindia"
 	 
  }

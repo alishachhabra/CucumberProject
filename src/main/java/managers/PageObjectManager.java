@@ -4,19 +4,16 @@ import org.openqa.selenium.WebDriver;
 
 import pages.HomePageImpl;
 import pages.IHomePage;
-import pages.IOrderSummaryPopUp;
-import pages.IPaymentPage;
-import pages.IShoppingCartPage;
-import pages.OrderSummaryPopUpImpl;
-import pages.PaymentPageImpl;
-import pages.ShoppingCartPageImpl;
+import pages.ILoginPage;
+import pages.IProfilePage;
+import pages.LoginPageImpl;
+import pages.ProfilePageImpl;
 
 public class PageObjectManager {
 	private IHomePage homePage;
 	private WebDriver driver;
-	private IShoppingCartPage shoppingCartPage;
-	private IOrderSummaryPopUp orderSummaryPopUp;
-	private IPaymentPage paymentPage;
+	private ILoginPage loginPage;
+	private IProfilePage profilePage;
 
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -29,21 +26,17 @@ public class PageObjectManager {
 
 	}
 	
-	public IShoppingCartPage getShoppingCartPage() {
+	public ILoginPage getLoginPage() {
 
-		return (shoppingCartPage == null) ? shoppingCartPage = new ShoppingCartPageImpl(driver) : shoppingCartPage;
-
-	}
-	
-	public IOrderSummaryPopUp getOrderSummaryPopUp() {
-
-		return (orderSummaryPopUp == null) ? orderSummaryPopUp = new OrderSummaryPopUpImpl(driver) : orderSummaryPopUp;
+		return (loginPage == null) ? loginPage = new LoginPageImpl(driver) : loginPage;
 
 	}
 	
-	public IPaymentPage getPaymentPage() {
+	
+	
+	public IProfilePage getProfilePage() {
 
-		return (paymentPage == null) ? paymentPage = new PaymentPageImpl(driver) : paymentPage;
+		return (profilePage == null) ? profilePage = new ProfilePageImpl(driver) : profilePage;
 
 	}
 }

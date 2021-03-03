@@ -12,81 +12,116 @@ import dataProviders.CustomerDataBean;
 import managers.WebDriverManager;
 import utils.SupportMethods;
 
-public class ShoppingCartPageImpl implements IShoppingCartPage {
+public class LoginPageImpl implements ILoginPage {
 
-	public ShoppingCartPageImpl(WebDriver driver) {
+	public LoginPageImpl(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(xpath = "//span[contains(text(),'Shopping Cart')]")
-	private WebElement titleShoppingCart;
+	@FindBy(xpath = "//h1[@role='heading']/span | //h2[@role='heading']/span")
+	private WebElement titleLogin;
 
-	public WebElement getTitleShoppingCart() {
-		return titleShoppingCart;
+	public WebElement getTitleLoginPage() {
+		return titleLogin;
+	}
+	
+	
+	@FindBy(xpath = "//input[@type!='hidden']//ancestor::div[@class='css-1dbjc4n r-ymttw5 r-1f1sjgu']//following-sibling::div//span[text()='Log in']//ancestor::div[@role='button']")
+	private WebElement loginButton;
+
+	public WebElement getLoginButton() {
+		return loginButton;
+	}
+	
+	
+	@FindBy(xpath = "//input[@name='session[username_or_email]' and @type!='hidden']")
+	private WebElement emailOrUserName;
+	
+	@FindBy(xpath = "//input[@name='session[password]' and @type!='hidden']")
+	private WebElement password;
+	
+	@FindBy(xpath = "//div[@role='presentation']//img[@alt='alisha']")
+	private WebElement profileButtonHomePage;
+	
+	
+	@FindBy(xpath = "//a[@href='/logout']")
+	private WebElement logoutLink;
+	
+	
+	@FindBy(xpath = "//span[text()='Log out']")
+	private WebElement logoutButton;
+	
+	public WebElement getProfileButtonHomePage() {
+		return profileButtonHomePage;
 	}
 
-	@FindBy(xpath = "//tr[@class='total']//td[@class='amount']")
-	private WebElement totalAmount;
-
-	public WebElement getTotalAmount() {
-		return totalAmount;
+	public WebElement getLogoutButton() {
+		return logoutButton;
+	}
+	
+	public WebElement getLogoutLink() {
+		return logoutLink;
 	}
 
-	@FindBy(xpath = "//td[contains(text(),'Address')]//following-sibling::td/textarea")
-	private WebElement customerAddress;
-
-	public WebElement getCustomerAddress() {
-		return customerAddress;
+	public WebElement getEmailOrUserName() {
+		return emailOrUserName;
 	}
 
-	@FindBy(xpath = "//div[@class='cart-checkout']")
-	private WebElement buttonCheckout;
-
-	public WebElement getButtonCheckout() {
-		return buttonCheckout;
+	public WebElement getPassword() {
+		return password;
 	}
 
-	public void verifyNavigatedToShoppingCart() {
-		SupportMethods.waitForElementToBeDisplayed(getTitleShoppingCart(), 10);
-		Assert.assertTrue(getTitleShoppingCart().getText().contains("Shopping Cart"),
-				"Shopping cart title is not displaying");
-		Reporter.log("User navigated to shopping cart page");
+	public void verifyNavigatedToLoginPage() {
+		SupportMethods.waitForElementToBeDisplayed(getTitleLoginPage(), 10);
+		Assert.assertTrue(getTitleLoginPage().getText().contains("Log in"),
+				"Login page title is not displaying");
+		Reporter.log("User navigated to login page");
 
 	}
+	
+	public void verifyLoginButtonDisabled(){
+		SupportMethods.waitForElementToBeDisplayed(getEmailOrUserName(), 10);
+		
+		Assert.assertTrue(getLoginButton().getAttribute("aria-disabled").equalsIgnoreCase("true"),
+				"Login button is disabled");
+		Reporter.log("Login button is disabled");
+	}
+	
+	
 
 	public void fillCustomerData(CustomerDataBean customerData) {
-		findCustomerDetailFieldElement("Name").clear();
-		findCustomerDetailFieldElement("Name").sendKeys(customerData.name);
-		findCustomerDetailFieldElement("Email").clear();
-		findCustomerDetailFieldElement("Email").sendKeys(customerData.email);
-		findCustomerDetailFieldElement("Phone").clear();
-		findCustomerDetailFieldElement("Phone").sendKeys(customerData.phone);
-		findCustomerDetailFieldElement("City").clear();
-		findCustomerDetailFieldElement("City").sendKeys(customerData.city);
-		getCustomerAddress().clear();
-		getCustomerAddress().sendKeys(customerData.address);
-		// findCustomerDetailFieldElement("Postal").clear();
-		// findCustomerDetailFieldElement("Postal").sendKeys(customerData.postalCode);
+		getEmailOrUserName().sendKeys(customerData.username);
+		getPassword().sendKeys(customerData.password);
 
 		Reporter.log("Customer details filled");
-		SupportMethods.waitForElementToBeClickable(getButtonCheckout(), 10);
+		
+	}
+	
+	public void clickOnLoginButton(){
+		SupportMethods.waitForElementToBeClickable(getLoginButton(), 10);
 
-		getButtonCheckout().click();
-		Reporter.log("Clicked on Checkout button");
+		getLoginButton().click();
+		Reporter.log("Clicked on login button");
 
 	}
-
-	public WebElement findCustomerDetailFieldElement(String fieldName) {
-		WebElement ele = WebDriverManager.getDriver()
-				.findElement(By.xpath("//td[contains(text(),'" + fieldName + "')]//following-sibling::td/input"));
-
-		SupportMethods.waitForElementToBeDisplayed(ele, 10);
-		if (ele.isDisplayed()) {
-			return ele;
-		} else {
-			throw new RuntimeException("Field " + fieldName + " is not present");
-		}
+	
+	public void verifyNavigatedToTwitterHome() {
+		SupportMethods.waitForElementToBeDisplayed(getTitleLoginPage(), 10);
+		Assert.assertTrue(getTitleLoginPage().getText().trim().equalsIgnoreCase("Home"), "Title is not displaying");
+		Reporter.log("User navigated to twitter home");
 
 	}
+	
+	public void userLogout(){
+		SupportMethods.waitForElementToBeDisplayed(getProfileButtonHomePage(), 10);
+		getProfileButtonHomePage().click();
+		
+		SupportMethods.waitForElementToBeDisplayed(getLogoutLink(), 10);
+		getLogoutLink().click();
+		
+		SupportMethods.waitForElementToBeDisplayed(getLogoutButton(), 10);
+		getLogoutButton().click();
+	}
+
 
 }

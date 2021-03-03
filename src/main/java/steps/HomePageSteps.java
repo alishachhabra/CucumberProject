@@ -20,12 +20,12 @@ public class HomePageSteps {
 
 		homePage.navigateToHomePage(WebDriverManager.getDriver(),
 				FileReaderManager.getInstance().getConfigReader().getApplicationUrl());
-		homePage.verifyNavigatedToHomePage();
+		homePage.verifyNavigatedToHomePage(WebDriverManager.getDriver());
 	}
 
-	@When("^user clicks on Buy now button$")
-	public void user_clicks_on_Buy_now_button() {
+	@When("^user clicks on login button$")
+	public void user_clicks_on_login_button() {
 
-		homePage.clickOnBuyNowButton();
+		homePage.clickOnLoginButton();
 	}
 }

@@ -1,43 +1,77 @@
-Feature: Chekout Feature
-  Checkout flow for puchasing pillow
+Feature: Twitter
    
-   Scenario Outline: checkout flow for purchasing Pillow using Credit Card as payment method with valid card details
+   Scenario Outline: Login to Twitter
     Given user is able to launch application url
-    When user clicks on Buy now button
-	And user should be navigated to Shopping Cart
- 	And user enters customer details
- 	Then user should be navigated to order summary popup
- 	And user clicks on continue button on order summary popup
- 	Then user should be navigated to payment page
- 	Then user selects payment method as "Credit Card"
- 	And user navigated to payment type page
- 	And user enter card details from file "<fileName>"
- 	Then user clicks on paynow button
- 	And user navigated to payment processing page
- 	And user enters otp after verifying total amount
- 	Then verify payment completed
+    When user clicks on login button
+	And user should be navigated to Login Page
+ 	And user verify login button is disabled
+ 	And user enters username and password from file "<fileName>"
+ 	Then user clicks on login button on login page
+ 	And user should navigate to twitter home page
+	And user logout from twitter
+Examples:
+|fileName|
+|CustomerDetails.json|
+
+Scenario Outline: Upload profile picture
+    Given user is able to launch application url
+    When user clicks on login button
+	And user should be navigated to Login Page
+ 	And user enters username and password from file "<fileName>"
+ 	Then user clicks on login button on login page
+ 	And user should navigate to twitter home page
+ 	And user clicks on profile button
+ 	And user uploads profile picture
+ 	
 
 Examples:
 |fileName|
-|CardDetails.json|
-
-Scenario Outline: checkout flow for purchasing Pillow using Credit Card as payment method with invalid card details
-    Given user is able to launch application url
-    When user clicks on Buy now button
-	And user should be navigated to Shopping Cart
- 	And user enters customer details
- 	Then user should be navigated to order summary popup
- 	And user clicks on continue button on order summary popup
- 	Then user should be navigated to payment page
- 	Then user selects payment method as "Credit Card"
- 	And user navigated to payment type page
- 	And user enter card details from file "<fileName>"
- 	Then user clicks on paynow button
-
-
-Examples:
-|fileName|
-|InvalidCardDetails.json|
-
+|CustomerDetails.json|
    
     
+    Scenario Outline: Update Profile
+    Given user is able to launch application url
+    When user clicks on login button
+	And user should be navigated to Login Page
+ 	And user enters username and password from file "<login>"
+ 	Then user clicks on login button on login page
+ 	And user should navigate to twitter home page
+ 	And user clicks on profile button
+ 	And user clicks on edit profile button
+ 	And user enters profile data from file "<profile>"
+ 	
+
+Examples:
+|login|profile|
+|CustomerDetails.json|ProfileDetails.json|
+
+ Scenario Outline: Verify updated Profile details
+    Given user is able to launch application url
+    When user clicks on login button
+	And user should be navigated to Login Page
+ 	And user enters username and password from file "<login>"
+ 	Then user clicks on login button on login page
+ 	And user should navigate to twitter home page
+ 	And user clicks on profile button
+ 	And user verify profile data from file "<profile>"
+ 	
+
+Examples:
+|login|profile|
+|CustomerDetails.json|ProfileDetails.json|
+
+Scenario Outline: Fetch tweets
+    Given user is able to launch application url
+    When user clicks on login button
+	And user should be navigated to Login Page
+ 	And user enters username and password from file "<login>"
+ 	Then user clicks on login button on login page
+ 	And user should navigate to twitter home page
+ 	And enter search data from file "<profile>"
+ 	And Fetch tweet details
+ 	
+
+Examples:
+|login|profile|
+|CustomerDetails.json|ProfileDetails.json|
+   

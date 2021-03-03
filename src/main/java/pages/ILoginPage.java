@@ -2,10 +2,14 @@ package pages;
 
 import dataProviders.CustomerDataBean;
 
-public interface IShoppingCartPage {
+public interface ILoginPage {
 
-	void verifyNavigatedToShoppingCart();
+	void verifyNavigatedToLoginPage();
 
 	void fillCustomerData(CustomerDataBean customerData);
+	void verifyLoginButtonDisabled();
+	void clickOnLoginButton();
+	void userLogout();
+	void verifyNavigatedToTwitterHome();
 
 }

@@ -15,18 +15,21 @@ public class HomePageImpl implements IHomePage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(xpath = "//div[@class='title']")
-	private WebElement title;
 
-	@FindBy(xpath = "//a[@class='btn buy']")
-	private WebElement buttonBuyNow;
+	@FindBy(xpath = "//a[@href='/login']")
+	private WebElement buttonLogin;
 
-	public WebElement getTitle() {
-		return title;
+
+	public WebElement getButtonLogin() {
+		return buttonLogin;
 	}
 
-	public WebElement getButtonBuyNow() {
-		return buttonBuyNow;
+	@FindBy(xpath = "//span[text()='Happening now']")
+	private WebElement title;
+	
+	
+	public WebElement getTitle() {
+		return title;
 	}
 
 	public void navigateToHomePage(WebDriver driver, String url) {
@@ -34,21 +37,21 @@ public class HomePageImpl implements IHomePage {
 
 	}
 
-	public void verifyNavigatedToHomePage() {
-		SupportMethods.waitForElementToBeDisplayed(getTitle(),10);
-		Assert.assertTrue(getTitle().getText().equalsIgnoreCase("Midtrans Pillow"), "Title is not displaying");
-		Reporter.log("User navigated to home page");
+	public void verifyNavigatedToHomePage(WebDriver driver) {
+		SupportMethods.waitForElementToBeClickable(getTitle(), 10);
+		Assert.assertTrue(getTitle().getText().equalsIgnoreCase("Happening now"), "Title is not displaying");
+		Reporter.log("User navigated to twitter");
 
 	}
 
-	public void clickOnBuyNowButton() {
+	public void clickOnLoginButton() {
 
-		SupportMethods.waitForElementToBeClickable(getButtonBuyNow(), 10);
-		if (getButtonBuyNow().isDisplayed()) {
-			getButtonBuyNow().click();
-			Reporter.log("Clicked on Buy Now button");
+		SupportMethods.waitForElementToBeClickable(getButtonLogin(), 10);
+		if (getButtonLogin().isDisplayed()) {
+			getButtonLogin().click();
+			Reporter.log("Clicked on login button");
 		} else {
-			throw new RuntimeException("Buy Now button not displaying");
+			throw new RuntimeException("Login button not displaying");
 		}
 	}
 
